@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login_Activity extends AppCompatActivity {
 
@@ -34,7 +35,17 @@ public class Login_Activity extends AppCompatActivity {
                 String loginSenha = senha.getText().toString();  // Senha digitada pelo usuário
 
                 // Verifica se os dados foram digitados
-                if ( (!TextUtils.isEmpty(loginEmail)) || (!TextUtils.isEmpty(loginSenha)) ){
+                if (loginEmail.equals("")){
+
+                    Toast.makeText(Login_Activity.this, "Email não inserido", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (loginSenha.equals("")){
+
+                    Toast.makeText(Login_Activity.this, "Senha não inserida", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
 
                 }
 
