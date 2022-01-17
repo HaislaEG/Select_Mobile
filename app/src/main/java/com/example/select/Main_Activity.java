@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.select.materiais.Metal_Activity;
+import com.example.select.materiais.Papel_Activity;
+import com.example.select.materiais.Plastico_Activity;
+import com.example.select.materiais.Vidro_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Main_Activity extends AppCompatActivity {
