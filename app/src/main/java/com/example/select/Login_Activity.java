@@ -47,6 +47,8 @@ public class Login_Activity extends AppCompatActivity {
                 }
                 else{
 
+                    if ( (loginEmail && loginSenha)  ) {}
+
                 }
 
             }
