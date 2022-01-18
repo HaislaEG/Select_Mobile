@@ -74,6 +74,27 @@
             android:exported="false"/>
 
         <activity
+            android:name=".materiais.Metal_Activity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".materiais.Papel_Activity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".materiais.Plastico_Activity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".materiais.Vidro_Activity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+
+        <activity
             android:name=".Login_Activity"
             android:screenOrientation="portrait"
             android:exported="true">

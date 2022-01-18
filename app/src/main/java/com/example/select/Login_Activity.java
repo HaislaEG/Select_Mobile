@@ -61,8 +61,8 @@ public class Login_Activity extends AppCompatActivity {
         btnLoginCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iA = new Intent(Login_Activity.this, Cadastro_Activity.class);
-                startActivity(iA);
+                Intent i = new Intent(Login_Activity.this, Cadastro_Activity.class);
+                startActivity(i);
             }
         });
 
