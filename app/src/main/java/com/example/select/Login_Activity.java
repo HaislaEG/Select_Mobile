@@ -28,7 +28,7 @@ public class Login_Activity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                /*
                 v.setEnabled(true);
 
                 String loginEmail = email.getText().toString();  // Email digitado pelo usuário
@@ -49,7 +49,10 @@ public class Login_Activity extends AppCompatActivity {
 
                     //if ( (loginEmail && loginSenha)  ) {}
 
-                }
+                }*/
+
+                Intent i = new Intent(Login_Activity.this, Main_Activity.class);
+                startActivity(i);
 
             }
         });
