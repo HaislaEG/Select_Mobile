@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/btnMetal1"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
@@ -89,7 +89,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="- Como reutilizar latas de metal na decoração de casa"
-            app:layout_constraintEnd_toStartOf="@+id/button9"
+            app:layout_constraintEnd_toStartOf="@+id/btnMetal1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -102,12 +102,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="- 16 ideias para reaproveitar latas de metal na decoração"
-            app:layout_constraintEnd_toStartOf="@+id/button11"
+            app:layout_constraintEnd_toStartOf="@+id/btnMetal2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/btnMetal2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
@@ -125,13 +125,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="- 10 ideias para transformar latas de alumínio em itens decorativos"
-            app:layout_constraintEnd_toStartOf="@+id/button12"
+            app:layout_constraintEnd_toStartOf="@+id/btnMetal3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/btnMetal3"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
