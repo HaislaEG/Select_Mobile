@@ -6,7 +6,18 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.select.util.HttpRequest;
+import com.example.select.util.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Cadastro_ViewModel extends ViewModel {
 
@@ -17,18 +28,12 @@ public class Cadastro_ViewModel extends ViewModel {
 
         if (cadastro == null){
             cadastro = new MutableLiveData<List<Cadastro_Activity>>();
-            loadCadastro();
+            //loadCadastro();
 
         }
 
 
         return cadastro;
-
-    }
-
-    // "Puxa" a conexão com o servidor
-    private void loadCadastro(){
-
 
     }
 

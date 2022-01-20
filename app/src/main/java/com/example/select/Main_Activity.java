@@ -63,6 +63,7 @@ public class Main_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Main_Activity.this, Papel_Activity.class);
+                startActivity(i);
             }
         });
 
@@ -71,6 +72,7 @@ public class Main_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Main_Activity.this, Plastico_Activity.class);
+                startActivity(i);
             }
         });
 
@@ -79,6 +81,7 @@ public class Main_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Main_Activity.this, Metal_Activity.class);
+                startActivity(i);
             }
         });
 
@@ -87,6 +90,7 @@ public class Main_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Main_Activity.this, Vidro_Activity.class);
+                startActivity(i);
             }
         });
 

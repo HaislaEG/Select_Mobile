@@ -24,11 +24,6 @@
         android:theme="@style/Theme.Select">
 
         <activity
-            android:name=".AdicionarEndereco_Activity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-
-        <activity
             android:name=".AlterarSenha_Activity"
             android:screenOrientation="portrait"
             android:exported="false" />

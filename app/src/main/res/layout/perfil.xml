@@ -33,7 +33,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tbMain"
+            app:layout_constraintBottom_toBottomOf="@+id/tbPerfil"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
@@ -160,17 +160,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfilComplemento" />
 
-        <Button
-            android:id="@+id/btnPerfilAddEndereco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#1CBD82"
-            android:text="Adicionar endereço"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPerfilEditar" />
-
 
         <Button
             android:id="@+id/btnPerfilAlterarSenha"
@@ -182,7 +171,7 @@
             android:text="Alterar senha"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPerfilAddEndereco" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPerfilEditar" />
 
         <Button
             android:id="@+id/btnPerfilExcluirConta"
