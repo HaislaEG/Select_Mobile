@@ -46,31 +46,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tbSolicitarRetirada" />
 
-        <EditText
-            android:id="@+id/etSolicitarEndereco"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="Digite o endereço"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="447dp" />
-
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
             android:text="Qual o material a ser retirado?"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etSolicitarEndereco" />
+            app:layout_constraintTop_toBottomOf="@+id/Referencia" />
 
         <CheckBox
             android:id="@+id/cbSolicitarVidro"
@@ -187,14 +173,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="CEP"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etRetiradaBairro" />
+            app:layout_constraintTop_toBottomOf="@+id/etRetiradaNumero" />
 
         <EditText
             android:id="@+id/Referencia"
@@ -207,6 +194,7 @@
             android:hint="Referencia"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etRetiradaCEP" />
 
@@ -222,7 +210,32 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Referencia" />
+            app:layout_constraintTop_toBottomOf="@+id/etRetiradaBairro" />
+
+        <EditText
+            android:id="@+id/etRetiradaNumero"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Número"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etRetiradaCidade" />
+
+        <EditText
+            android:id="@+id/etReferenciaUF"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="UF"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/etRetiradaNumero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etRetiradaNumero" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
