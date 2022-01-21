@@ -1,9 +1,16 @@
 package com.example.select;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,13 +27,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Login_Activity extends AppCompatActivity {
 
 
-
+    static int RESULT_REQUEST_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,12 @@ public class Login_Activity extends AppCompatActivity {
 
         EditText email = findViewById(R.id.etLoginEmail);
         EditText senha = findViewById(R.id.etLoginSenha);
+
+        List<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.CAMERA);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        checkForPermissions(permissions);
 
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +145,68 @@ public class Login_Activity extends AppCompatActivity {
             }
         }
     });
+
+
+    /*   CÓDIGO QUE FAZ A VERIFICAÇÃO DAS PERMISSÕES NECESSÁRIAS PARA O FUNCIONAMENTO DA APLIACAÇÃO   */
+    // Verifica as permissões necessárias para o funcionamento do apicativo
+    private void checkForPermissions (List<String> permissions) {
+
+        List<String> permissionsNotGranted = new ArrayList<>();
+
+        for (String permission : permissions) {
+            if (!hasPermission(permission)){
+                permissionsNotGranted.add(permission);
+            }
+        }
+
+        // Requerimento das permissões que não existem
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            requestPermissions(permissionsNotGranted.toArray(new String[permissionsNotGranted.size()]), RESULT_REQUEST_PERMISSION);
+        }
+
+    }
+
+
+    //Checa se as permissões necessárias ao funcionamento do apliativo já existem ou não
+    private boolean hasPermission (String permission){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return ActivityCompat.checkSelfPermission(Login_Activity.this, permission) == PackageManager.PERMISSION_GRANTED;
+        }
+
+        return false;
+    }
+
+
+    // Verifica as permissões e Avisa ao usuário que elas são necessárias para o funcionamento do aplicativo
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        List<String> permissionsRejected = new ArrayList<>();
+
+        if (requestCode == RESULT_REQUEST_PERMISSION){
+            for (String permission : permissions) {
+                if (!hasPermission(permission)) {
+                    permissionsRejected.add(permission);
+                }
+            }
+        }
+
+        if (permissionsRejected.size() > 0){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(shouldShowRequestPermissionRationale(permissionsRejected.get(0))){
+                    new AlertDialog.Builder(Login_Activity.this).setMessage("Para usar essa app é preciso conceder essas permissões").
+                            setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestPermissions(permissionsRejected.toArray(new String[permissionsRejected.size()]), RESULT_REQUEST_PERMISSION);
+                                }
+                            }).create().show();
+                }
+            }
+        }
+    }
 
 
 }
