@@ -51,10 +51,6 @@ public class Cadastro_Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbCadastro);
         setSupportActionBar(toolbar);  //Passa a ser a toolbar principal da aplicação
 
-        // Escolher foto da galeria para ser a foto de perfil do usuário
-        imvCadastroFoto = findViewById(R.id.imvCadastroFoto);
-        imvCadastroFoto.setOnClickListener(imgViewHandler);
-
 
         // Salvar os dados do cadastro
         Button btnCadastroSalvar = findViewById(R.id.btnCadastroSalvar);
@@ -127,9 +123,6 @@ public class Cadastro_Activity extends AppCompatActivity {
                     Toast.makeText(Cadastro_Activity.this, "Você não concordou com nossos termos e condições de uso", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                //Escalona a foto
-
 
 
                 // Requisição HTTP
@@ -210,31 +203,6 @@ public class Cadastro_Activity extends AppCompatActivity {
             }
         });
 
-    }
-
-    View.OnClickListener imgViewHandler = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            i.setType("image/*");
-            startActivityForResult(i, RequisicaoEscolherFoto);
-
-        }
-    };
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RequisicaoEscolherFoto){
-            // Usuário decide se usa ou não a foto
-            if (resultCode == Activity.RESULT_OK){
-
-                localFotoSelecionada = data.getData();
-                imvCadastroFoto.setImageURI(localFotoSelecionada);
-
-            }
-        }
     }
 
 }
