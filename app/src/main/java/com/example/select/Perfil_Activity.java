@@ -37,16 +37,6 @@ public class Perfil_Activity extends AppCompatActivity {
         });
 
 
-        //Botão para adicionar um endereço
-        Button btnPerfilAddEndereco = findViewById(R.id.btnPerfilAddEndereco);
-        btnPerfilAddEndereco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Perfil_Activity.this, AdicionarEndereco_Activity.class);
-                startActivity(i);
-            }
-        });
-
         //Botão para alterar a senha
         Button btnPerfilAlterarSenha = findViewById(R.id.btnPerfilAlterarSenha);
         btnPerfilAlterarSenha.setOnClickListener(new View.OnClickListener() {

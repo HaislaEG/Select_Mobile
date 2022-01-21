@@ -29,14 +29,6 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
             }
         });
 
-        Button btnSolicitarCancelar = findViewById(R.id.btnSolicitarCancelar);
-        btnSolicitarCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent iA = new Intent(SolicitarRetirada_Activity.this, Main_Activity.class);
-                startActivity(iA);
-            }
-        });
 
     }
 

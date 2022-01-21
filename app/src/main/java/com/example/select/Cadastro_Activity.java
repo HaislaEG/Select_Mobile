@@ -58,8 +58,6 @@ public class Cadastro_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                v.setEnabled(false);  // Desabilita o botão
-
                 // Verifica se os dados foram preenchidos pelo usuário
                     //Nome
                 EditText etCadastroNome = findViewById(R.id.etCadastroNome);
@@ -124,6 +122,13 @@ public class Cadastro_Activity extends AppCompatActivity {
                     return;
                 }
 
+                if (!senha.equals(confirmarSenha)){
+
+                    Toast.makeText(Cadastro_Activity.this, "A senha e a confirmação estão diferentes!", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
 
                 // Requisição HTTP
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -133,16 +138,10 @@ public class Cadastro_Activity extends AppCompatActivity {
 
                         HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "usuario.php", "POST", "UTF-8");
                         httpRequest.addParam("nome", nome);
-                        while (!senha.equals(confirmarSenha)){
-
-                            Toast.makeText(Cadastro_Activity.this, "A senha e a confirmação estão diferentes!", Toast.LENGTH_SHORT).show();
-
-                        }
                         httpRequest.addParam("senha", senha);
                         httpRequest.addParam("email", email);
                         httpRequest.addParam("telefone", telefone);
                         httpRequest.addParam("cpf", cpf);
-                        //httpRequest.addFile();
 
                         try {
 
@@ -164,7 +163,8 @@ public class Cadastro_Activity extends AppCompatActivity {
                                     if (success == 1) {
 
                                         Toast.makeText(Cadastro_Activity.this, "Cadastro realizado com sucesso! Agora faça seu login!", Toast.LENGTH_SHORT).show();
-                                        setResult(RESULT_OK);
+                                        Intent i = new Intent(Cadastro_Activity.this, Login_Activity.class);
+                                        startActivity(i);
                                         finish();
 
                                     }
@@ -176,9 +176,6 @@ public class Cadastro_Activity extends AppCompatActivity {
                                 }
                             });
 
-                            if ((!nome.isEmpty()) && (!cpf.isEmpty()) && (!email.isEmpty()) && (!senha.isEmpty()) && (!confirmarSenha.isEmpty()) && (!telefone.isEmpty()) && (!dataNasc.isEmpty()) && (!cbTermos.isChecked())) {
-                                v.setEnabled(true);
-                            }
                         }
                         catch (IOException | JSONException e) {
                             e.printStackTrace();
@@ -187,19 +184,6 @@ public class Cadastro_Activity extends AppCompatActivity {
                     }
                 });
 
-                Intent i = new Intent(Cadastro_Activity.this, Login_Activity.class);
-                startActivity(i);
-
-            }
-        });
-
-
-        Button btnCadastroCancelar = findViewById(R.id.btnCadastroCancelar);
-        btnCadastroCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Cadastro_Activity.this, Login_Activity.class);
-                startActivity(i);
             }
         });
 

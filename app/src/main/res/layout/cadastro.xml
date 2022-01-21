@@ -175,28 +175,11 @@
             android:id="@+id/btnCadastroSalvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:backgroundTint="#1CBD82"
             android:text="Salvar"
-            app:layout_constraintEnd_toEndOf="@+id/btnCadastroCancelar"
-            app:layout_constraintStart_toStartOf="@+id/btnCadastroCancelar"
-            app:layout_constraintTop_toBottomOf="@+id/cbTermos" />
-
-        <Button
-            android:id="@+id/btnCadastroCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#1CBD82"
-            android:text="Cancelar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.58"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCadastroSalvar" />
+            app:layout_constraintTop_toBottomOf="@+id/cbTermos"
+            tools:layout_editor_absoluteX="183dp" />
 
         <TextView
             android:id="@+id/textView29"

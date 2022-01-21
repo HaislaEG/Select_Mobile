@@ -56,7 +56,7 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                v.setEnabled(true);
+                /*v.setEnabled(true);
 
                 String loginEmail = email.getText().toString();  // Email digitado pelo usuário
                 String loginSenha = senha.getText().toString();  // Senha digitada pelo usuário
@@ -75,7 +75,10 @@ public class Login_Activity extends AppCompatActivity {
                 else{
 
                     loadCadastro(loginEmail, loginSenha);
-                }
+                }*/
+
+                Intent i = new Intent(Login_Activity.this, Main_Activity.class);
+                startActivity(i);
 
 
 
@@ -102,6 +105,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
+    /*
     // "Puxa" a conexão com o servidor
     public void loadCadastro(String Email, String Senha){
 
@@ -144,7 +148,7 @@ public class Login_Activity extends AppCompatActivity {
 
             }
         }
-    });
+    });*/
 
 
     /*   CÓDIGO QUE FAZ A VERIFICAÇÃO DAS PERMISSÕES NECESSÁRIAS PARA O FUNCIONAMENTO DA APLIACAÇÃO   */
