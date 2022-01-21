@@ -26,8 +26,7 @@ public class ConfirmarFoto_Activity extends AppCompatActivity {
         btnFotoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ConfirmarFoto_Activity.this, Conclusao_Activity.class);
-                startActivity(i);
+                //Pega a imagem e envia para o servidor
             }
         });
 

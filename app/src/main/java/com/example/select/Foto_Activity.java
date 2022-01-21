@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,10 +64,13 @@ public class Foto_Activity extends AppCompatActivity {
         btnTirarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Foto_Activity.this, ConfirmarFoto_Activity.class);
-                startActivity(i);
+                dispatchTakePictureIntent();
             }
         });
+
+
+
+
     }
 
 
@@ -112,12 +116,25 @@ public class Foto_Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RESULT_TAKE_PICTURE){
+
+            currentPhotoPath = getCurrentPhotoPath();
+
             if(resultCode == Activity.RESULT_OK){
+
+                ImageView imvFoto = findViewById(R.id.imvFoto);
+                Bitmap bitmap = Utils.getBitmap(currentPhotoPath, imvFoto.getWidth(), imvFoto.getHeight());
+                imvFoto.setImageBitmap(bitmap);
+
 
             }
             else {  // Se a foto não for tirada ela vai ser excluída
+
                 File f = new File(currentPhotoPath);
                 f.delete();
+                setCurrentPhotoPath("");
+                Intent i = new Intent(Foto_Activity.this, Foto_Activity.class);
+                startActivity(i);
+
             }
         }
     }
