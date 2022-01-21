@@ -1,14 +1,45 @@
 package com.example.select;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
+
+import com.example.select.util.Utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class SolicitarRetirada_Activity extends AppCompatActivity {
+
+    private static final int RESULT_TAKE_PICTURE = 2;
+    String currentPhotoPath = "";  // Diretório atual da foto escolhida
+    List<String> photos = new ArrayList<>();
+
+
+    public String getCurrentPhotoPath() {
+        return currentPhotoPath;
+    }
+
+    public void setCurrentPhotoPath(String currentPhotoPath) {
+        this.currentPhotoPath = currentPhotoPath;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,17 +50,91 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbSolicitarRetirada);
         setSupportActionBar(toolbar);  //Passa a ser a toolbar principal da aplicação
 
+        ImageView imvFoto = findViewById(R.id.imvFoto);
+        imvFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
+
 
         Button btnSolicitarProsseguir = findViewById(R.id.btnSolicitarProsseguir);
         btnSolicitarProsseguir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SolicitarRetirada_Activity.this, Foto_Activity.class);
+                Intent i = new Intent(SolicitarRetirada_Activity.this, Conclusao_Activity.class);
                 startActivity(i);
             }
         });
 
 
+    }
+
+
+    // Função para acessar e disparar a câmera
+    private void dispatchTakePictureIntent () {
+
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File f = null;
+
+        try {
+            f = createImageFile();
+        }
+        catch (IOException e) {
+            Toast.makeText(SolicitarRetirada_Activity.this, "Não foi possível criar o arquivo", Toast.LENGTH_LONG).show();
+        }
+
+        currentPhotoPath = f.getAbsolutePath();  // Acessa o endereço da foto
+
+        // Onde a foto vai ser salva
+        if (f != null){
+            Uri fUri = FileProvider.getUriForFile(SolicitarRetirada_Activity.this, "com.example.select.fileprovider", f);
+            i.putExtra(MediaStore.EXTRA_OUTPUT, fUri);  // Quando a foto for tirada ela vai ser salva em fUri
+            startActivityForResult(i, RESULT_TAKE_PICTURE);
+
+        }
+    }
+
+
+    // Cria o espaço de armazenamnto da foto tirada
+    private File createImageFile () throws IOException {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());  //Ano, mês, dia, hora, minuto e segundo
+        String imageFileName = "JPEG_" + timeStamp;
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File f = File.createTempFile(imageFileName, ".jpg", storageDir);  // Cria a pasta de armazenamento
+        return f;
+    }
+
+
+    // Verifica se o usuário tirou ou não a foto
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RESULT_TAKE_PICTURE){
+
+            currentPhotoPath = getCurrentPhotoPath();
+
+            if(resultCode == Activity.RESULT_OK){
+
+                ImageView imvFoto = findViewById(R.id.imvFoto);
+                Bitmap bitmap = Utils.getBitmap(currentPhotoPath, imvFoto.getWidth(), imvFoto.getHeight());
+                imvFoto.setImageBitmap(bitmap);
+
+
+            }
+            else {  // Se a foto não for tirada ela vai ser excluída
+
+                File f = new File(currentPhotoPath);
+                f.delete();
+                setCurrentPhotoPath("");
+                Intent i = new Intent(SolicitarRetirada_Activity.this, SolicitarRetirada_Activity.class);
+                startActivity(i);
+
+            }
+        }
     }
 
 }

@@ -38,19 +38,9 @@
             android:screenOrientation="portrait"
             android:exported="false" />
 
-        <activity
-            android:name=".ConfirmarFoto_Activity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-
         <activity android:name=".EditarPerfil_Activity"
             android:screenOrientation="portrait"
             android:exported="false"/>
-
-        <activity
-            android:name=".Foto_Activity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
 
         <activity
             android:name=".Main_Activity"
