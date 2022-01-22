@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -63,6 +65,66 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
         btnSolicitarProsseguir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                EditText etRetiradaRua = findViewById(R.id.etRetiradaRua);
+                String rua = etRetiradaRua.getText().toString();
+                if(rua.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'Rua' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaBairro = findViewById(R.id.etRetiradaBairro);
+                String bairro = etRetiradaBairro.getText().toString();
+                if(bairro.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'Bairro' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaCidade = findViewById(R.id.etRetiradaCidade);
+                String cidade = etRetiradaCidade.getText().toString();
+                if(cidade.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'Cidade' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaNumero = findViewById(R.id.etRetiradaNumero);
+                String numero = etRetiradaNumero.getText().toString();
+                if(numero.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'Número' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaUF = findViewById(R.id.etRetiradaUF);
+                String uf = etRetiradaUF.getText().toString();
+                if(uf.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'UF' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaCEP = findViewById(R.id.etRetiradaCEP);
+                String cep = etRetiradaCEP.getText().toString();
+                if(cep.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'CEP' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                EditText etRetiradaReferencia = findViewById(R.id.etReferencia);
+                String referencia = etRetiradaReferencia.getText().toString();
+                if(referencia.isEmpty()){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "O campo 'Referência' não foi preenchido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                CheckBox cbSolicitarVidro = findViewById(R.id.cbSolicitarVidro);
+                CheckBox cbSolicitarPlastico = findViewById(R.id.cbSolicitarPlastico);
+                CheckBox cbSolicitarPapel = findViewById(R.id.cbSolicitarPapel);
+                CheckBox cbSolicitarMetal = findViewById(R.id.cbSolicitarMetal);
+                if( (!cbSolicitarVidro.isChecked()) || (!cbSolicitarPlastico.isChecked()) || (!cbSolicitarPapel.isChecked()) || (!cbSolicitarMetal.isChecked()) ){
+                    Toast.makeText(SolicitarRetirada_Activity.this, "Você não marcou o material a ser retirado", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 Intent i = new Intent(SolicitarRetirada_Activity.this, Conclusao_Activity.class);
                 startActivity(i);
             }
