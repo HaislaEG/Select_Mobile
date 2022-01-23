@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.select.util.Config;
+import com.example.select.util.GetDataActivity;
 import com.example.select.util.HttpRequest;
 import com.example.select.util.Utils;
 
@@ -42,8 +44,12 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        EditText email = findViewById(R.id.etLoginEmail);
-        EditText senha = findViewById(R.id.etLoginSenha);
+        EditText etEmail = findViewById(R.id.etLoginEmail);
+        EditText etSenha = findViewById(R.id.etLoginSenha);
+
+        String email = etEmail.getText().toString();
+        String senha = etSenha.getText().toString();
+
 
         List<String> permissions = new ArrayList<>();
         permissions.add(Manifest.permission.CAMERA);
@@ -56,26 +62,23 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*v.setEnabled(true);
 
-                String loginEmail = email.getText().toString();  // Email digitado pelo usuário
-                String loginSenha = senha.getText().toString();  // Senha digitada pelo usuário
 
                 // Verifica se os dados foram digitados
-                if (loginEmail.equals("")){
+                if (email.equals("")){
 
                     Toast.makeText(Login_Activity.this, "Email não inserido", Toast.LENGTH_SHORT).show();
 
                 }
-                else if (loginSenha.equals("")){
+                else if (senha.equals("")){
 
                     Toast.makeText(Login_Activity.this, "Senha não inserida", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
 
-                    loadCadastro(loginEmail, loginSenha);
-                }*/
+                    loadCadastro(email, senha);
+                }
 
                 Intent i = new Intent(Login_Activity.this, Main_Activity.class);
                 startActivity(i);
@@ -105,7 +108,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
-    /*
+
     // "Puxa" a conexão com o servidor
     public void loadCadastro(String Email, String Senha){
 
@@ -113,42 +116,45 @@ public class Login_Activity extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "login.php", "POST", "UTF-8");
+                httpRequest.setBasicAuth(Email, Senha);
 
-                HttpRequest httpRequest = new HttpRequest("https://select-bd.herokuapp.com/get_all_Usuario.php", "GET", "UTF-8");
                 try {
-
                     InputStream is = httpRequest.execute();
                     String result = Utils.inputStream2String(is, "UTF-8");
                     httpRequest.finish();
 
                     JSONObject jsonObject = new JSONObject(result);
-                    int success = jsonObject.getInt("success");
-                    if (success == 1) {
-
-                        JSONArray jsonArray = jsonObject.getJSONArray("Usuario");
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-
-                            JSONObject jCadastro = jsonArray.getJSONObject(i);
-                            String Str = jCadastro.getString().toString();
-                            if ((Str.contains(Email)) && (Str.contains(Senha))) {
-                                Intent iA = new Intent(Login_Activity.this, Perfil_Activity.class);
-                                startActivity(iA);
+                    final int success = jsonObject.getInt("success");
+                    if(success == 1) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Config.setLogin(Login_Activity.this, Email);
+                                Config.setPassword(Login_Activity.this, Senha);
+                                Toast.makeText(Login_Activity.this, "Login realizado com sucesso", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(Login_Activity.this, GetDataActivity.class);
+                                startActivity(i);
                             }
-                        }
-
-
+                        });
                     }
+                    else {
+                        final String error = jsonObject.getString("error");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(Login_Activity.this, error, Toast.LENGTH_LONG).show();
+                            }
 
-
+                        });
+                    }
                 }
                 catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
-
             }
-        }
-    });*/
+        });
+    }
 
 
     /*   CÓDIGO QUE FAZ A VERIFICAÇÃO DAS PERMISSÕES NECESSÁRIAS PARA O FUNCIONAMENTO DA APLIACAÇÃO   */
