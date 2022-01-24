@@ -62,8 +62,6 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 // Verifica se os dados foram digitados
                 if (email.equals("")){
 

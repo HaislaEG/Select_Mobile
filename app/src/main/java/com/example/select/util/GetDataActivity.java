@@ -45,7 +45,7 @@ public class GetDataActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     final int success = jsonObject.getInt("success");
                     if(success == 1) {
-                        final String webData = jsonObject.getString("data");
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
