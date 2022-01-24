@@ -168,7 +168,6 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         }
 
 
-
                         httpRequest2.addParam("rua", rua);
                         httpRequest2.addParam("cep", cep);
                         httpRequest2.addParam("bairro", bairro);
@@ -176,7 +175,6 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         httpRequest2.addParam("uf", uf);
                         httpRequest2.addParam("cidade", cidade);
                         httpRequest2.addParam("numero", numero);
-
 
 
                         try {
@@ -212,6 +210,8 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                                     else {
 
                                         Toast.makeText(SolicitarRetirada_Activity.this, "Retirada não pôde ser solicitada", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(SolicitarRetirada_Activity.this, Main_Activity.class);
+                                        startActivity(i);
 
                                     }
                                 }
@@ -225,9 +225,6 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                     }
                 });
 
-
-                Intent i = new Intent(SolicitarRetirada_Activity.this, Main_Activity.class);
-                startActivity(i);
             }
 
         });

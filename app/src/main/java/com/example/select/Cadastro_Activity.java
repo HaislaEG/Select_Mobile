@@ -142,6 +142,7 @@ public class Cadastro_Activity extends AppCompatActivity {
                         httpRequest.addParam("email", email);
                         httpRequest.addParam("telefone", telefone);
                         httpRequest.addParam("cpf", cpf);
+                        httpRequest.addParam("cpf", dataNasc);
 
                         try {
 

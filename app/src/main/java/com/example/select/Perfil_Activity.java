@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -93,6 +94,9 @@ public class Perfil_Activity extends AppCompatActivity {
         msgBox.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+
+
                 Toast.makeText(Perfil_Activity.this, "Excluindo", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Perfil_Activity.this, Login_Activity.class);
                 startActivity(i);
@@ -110,6 +114,13 @@ public class Perfil_Activity extends AppCompatActivity {
 
         msgBox.show();
     }
+
+
+    //Função deletar perfil
+    public void deletarConta (){
+
+    }
+
 
 
 }
