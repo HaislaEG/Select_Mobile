@@ -80,11 +80,6 @@ public class Login_Activity extends AppCompatActivity {
                     loadCadastro(email, senha);
                 }
 
-                Intent i = new Intent(Login_Activity.this, Main_Activity.class);
-                startActivity(i);
-
-
-
             }
         });
 
@@ -133,7 +128,7 @@ public class Login_Activity extends AppCompatActivity {
                                 Config.setLogin(Login_Activity.this, Email);
                                 Config.setPassword(Login_Activity.this, Senha);
                                 Toast.makeText(Login_Activity.this, "Login realizado com sucesso", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(Login_Activity.this, GetDataActivity.class);
+                                Intent i = new Intent(Login_Activity.this, Main_Activity.class);
                                 startActivity(i);
                             }
                         });

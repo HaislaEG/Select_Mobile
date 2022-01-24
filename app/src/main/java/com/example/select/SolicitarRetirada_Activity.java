@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
@@ -31,6 +33,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -138,16 +142,32 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                 // Requisição HTTP
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
                 executorService.execute(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void run() {
+
+                        LocalDateTime hr = LocalDateTime.now();
+                        String horario = hr.toString();
 
                         HttpRequest httpRequest1 = new HttpRequest(Config.CAD_APP_URL + "retirada.php", "POST", "UTF-8");
                         HttpRequest httpRequest2 = new HttpRequest(Config.CAD_APP_URL + "endereco.php", "POST", "UTF-8");
 
-                        httpRequest1.addParam("data_hora_solicitacao", );
-                        httpRequest1.addParam("foto_material", senha);
-                        httpRequest1.addParam("material", email);
-                        //httpRequest1.addParam("foto_material", imvFoto)
+                        httpRequest1.addParam("data_hora_solicitacao", horario);
+                        httpRequest1.addParam("foto_material", getCurrentPhotoPath());
+                        if (cbSolicitarMetal.isChecked()){
+                            httpRequest1.addParam("material", String.valueOf(cbSolicitarMetal));
+                        }
+                        else if (cbSolicitarPapel.isChecked()){
+                            httpRequest1.addParam("material", String.valueOf(cbSolicitarPapel));
+                        }
+                        else if (cbSolicitarPlastico.isChecked()){
+                            httpRequest1.addParam("material", String.valueOf(cbSolicitarPlastico));
+                        }
+                        else {
+                            httpRequest1.addParam("material", String.valueOf(cbSolicitarVidro));
+                        }
+
+
 
                         httpRequest2.addParam("rua", rua);
                         httpRequest2.addParam("cep", cep);

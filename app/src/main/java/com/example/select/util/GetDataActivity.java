@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.select.Login_Activity;
+import com.example.select.Perfil_Activity;
 import com.example.select.R;
 
 import org.json.JSONException;
@@ -25,7 +26,6 @@ public class GetDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_data);
 
         final String login = Config.getLogin(GetDataActivity.this);
         final String password = Config.getPassword(GetDataActivity.this);
@@ -49,8 +49,8 @@ public class GetDataActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                TextView tvWebData = findViewById(R.id.tvWebData);
-                                tvWebData.setText(webData);
+                                Intent i = new Intent(GetDataActivity.this, Perfil_Activity.class);
+                                startActivity(i);
                             }
                         });
 
@@ -70,15 +70,5 @@ public class GetDataActivity extends AppCompatActivity {
             }
         });
 
-        Button btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Config.setLogin(GetDataActivity.this, "");
-                Config.setPassword(GetDataActivity.this, "");
-                Intent i = new Intent(GetDataActivity.this, Login_Activity.class);
-                startActivity(i);
-            }
-        });
     }
 }
