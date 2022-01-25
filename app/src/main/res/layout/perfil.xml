@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
         <TextView
-            android:id="@+id/tvPerfilRua"
+            android:id="@+id/tvPerfilEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -61,69 +61,10 @@
             android:text="TextView"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilNome" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilCpf" />
 
-        <TextView
-            android:id="@+id/tvPerfilBairro"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilRua" />
-
-        <TextView
-            android:id="@+id/tvPerfilCidade"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilBairro" />
-
-        <TextView
-            android:id="@+id/tvPerfilUf"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilCidade" />
-
-        <TextView
-            android:id="@+id/tvPerfilNumero"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilUf" />
-
-        <TextView
-            android:id="@+id/tvPerfilComplemento"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilUf" />
 
         <TextView
             android:id="@+id/tvPerfilTelefone"
@@ -134,7 +75,7 @@
             android:text="TextView"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilNumero" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilEmail" />
 
         <TextView
             android:id="@+id/tvPerfilDataNasc"
@@ -145,8 +86,7 @@
             android:text="TextView"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerfilComplemento" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilEmail" />
 
         <Button
             android:id="@+id/btnPerfilAlterarSenha"
@@ -171,19 +111,6 @@
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnPerfilAlterarSenha" />
-
-        <Button
-            android:id="@+id/btnPerfilCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="#1CBD82"
-            android:text="Cancelar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPerfilSalvar" />
 
         <Button
             android:id="@+id/btnPerfilSalvar"
@@ -222,6 +149,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tbPerfil" />
+
+        <TextView
+            android:id="@+id/tvPerfilCpf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilNome" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
