@@ -29,15 +29,5 @@ public class AlterarSenha_Activity extends AppCompatActivity {
             }
         });
 
-
-        Button btnSenhaCancelar = findViewById(R.id.btnSenhaCancelar);
-        btnSenhaCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent iA = new Intent(AlterarSenha_Activity.this, Perfil_Activity.class);
-                startActivity(iA);
-            }
-        });
-
     }
 }
