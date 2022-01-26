@@ -149,8 +149,7 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         LocalDateTime hr = LocalDateTime.now();
                         String horario = hr.toString();
 
-                        HttpRequest httpRequest1 = new HttpRequest(Config.CAD_APP_URL + "retirada.php", "POST", "UTF-8");
-                        HttpRequest httpRequest2 = new HttpRequest(Config.CAD_APP_URL + "endereco.php", "POST", "UTF-8");
+                        HttpRequest httpRequest1 = new HttpRequest(Config.CAD_APP_URL + "solicitar_retirada.php", "POST", "UTF-8");
 
                         httpRequest1.addParam("data_hora_solicitacao", horario);
                         httpRequest1.addParam("foto_material", getCurrentPhotoPath());
@@ -168,39 +167,39 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         }
 
 
-                        httpRequest2.addParam("rua", rua);
-                        httpRequest2.addParam("cep", cep);
-                        httpRequest2.addParam("bairro", bairro);
-                        httpRequest2.addParam("referencia", referencia);
-                        httpRequest2.addParam("uf", uf);
-                        httpRequest2.addParam("cidade", cidade);
-                        httpRequest2.addParam("numero", numero);
+                        httpRequest1.addParam("rua", rua);
+                        httpRequest1.addParam("cep", cep);
+                        httpRequest1.addParam("bairro", bairro);
+                        httpRequest1.addParam("referencia", referencia);
+                        httpRequest1.addParam("uf", uf);
+                        httpRequest1.addParam("cidade", cidade);
+                        httpRequest1.addParam("numero", numero);
 
 
                         try {
 
                             InputStream is1 = httpRequest1.execute();
-                            InputStream is2 = httpRequest2.execute();
+
 
                             String result1 = Utils.inputStream2String(is1, "UTF-8");
-                            String result2 = Utils.inputStream2String(is2, "UTF-8");
+
                             httpRequest1.finish();
-                            httpRequest2.finish();
+
 
                             Log.d("HTTP_REQUEST_RESULT", result1);
-                            Log.d("HTTP_REQUEST_RESULT", result2);
+
 
                             // Transforma a string em dados armazenáveis para a aplicação
                             JSONObject jsonObject1 = new JSONObject(result1);
-                            JSONObject jsonObject2 = new JSONObject(result2);
+
                             int success1 = jsonObject1.getInt("success");
-                            int success2 = jsonObject2.getInt("success");
+
 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     // Verifica se o cadastro foi realizado
-                                    if ( (success1 == 1) && (success2 == 1) ) {
+                                    if ( success1 == 1 ) {
 
                                         Intent i = new Intent(SolicitarRetirada_Activity.this, Conclusao_Activity.class);
                                         startActivity(i);
