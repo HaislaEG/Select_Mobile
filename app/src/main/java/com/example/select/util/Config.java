@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class Config {
 
-    public static String CAD_APP_URL = "https://select-bd.herokuapp.com/";
+    public static String CAD_APP_URL = "https://selectweb.herokuapp.com/";
 
     public static void setLogin(Context context, String login) {
         SharedPreferences mPrefs = context.getSharedPreferences("configs", 0);
