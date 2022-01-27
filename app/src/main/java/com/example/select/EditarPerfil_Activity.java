@@ -1,7 +1,11 @@
 package com.example.select;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,10 +25,6 @@ import java.util.concurrent.Executors;
 
 public class EditarPerfil_Activity extends AppCompatActivity {
 
-    EditText nome = findViewById(R.id.etEditarNome);
-    EditText telefone = findViewById(R.id.etEditarTelefone);
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editar_perfil);
@@ -33,36 +33,72 @@ public class EditarPerfil_Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbEditarPerfil);
         setSupportActionBar(toolbar);  //Passa a ser a toolbar principal da aplicação
 
+        String email = Config.getLogin(EditarPerfil_Activity.this);
+        String senha = Config.getPassword(EditarPerfil_Activity.this);
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new Runnable() {
+
+        Button btnEditar = findViewById(R.id.btnEditarSalvar);
+        btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "perfil.php", "POST", "UTF-8");
+            public void onClick(View v) {
 
-                try {
-                    InputStream is = httpRequest.execute();
-                    String result = Utils.inputStream2String(is, "UTF-8");
-                    httpRequest.finish();
+                EditText etNome = findViewById(R.id.etEditarNome);
+                EditText etTelefone = findViewById(R.id.etEditarTelefone);
+                String nome = etNome.getText().toString();
+                String telefone = etTelefone.getText().toString();
 
-                    JSONObject jsonObject = new JSONObject(result);
-                    int success = jsonObject.getInt("success");
-                    if (success == 1) {
-                        JSONArray jsonArray = jsonObject.getJSONArray("lista");
-                        JSONObject jsonLista = jsonArray.getJSONObject(0);
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "alterar_perfil.php", "POST", "UTF-8");
+                        httpRequest.setBasicAuth(email, senha);
+                        httpRequest.addParam("nome", nome);
+                        httpRequest.addParam("telefone", telefone);
 
-                        nome.setText(jsonLista.getString("nome"));
-                        telefone.setText(jsonLista.getString("telefone"));
+                        try {
+                            InputStream is = httpRequest.execute();
+                            String result = Utils.inputStream2String(is, "UTF-8");
+                            httpRequest.finish();
+
+                            JSONObject jsonObject = new JSONObject(result);
+                            int success = jsonObject.getInt("success");
+                            if (success == 1) {
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(EditarPerfil_Activity.this, "Dados alterados com sucesso", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(EditarPerfil_Activity.this, Perfil_Activity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
+                            }
+                            else {
+
+                                String error = jsonObject.getString("error");
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Toast.makeText(EditarPerfil_Activity.this, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        }
+                        catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
 
-                }
-                catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
+                });
 
             }
-
         });
 
 
