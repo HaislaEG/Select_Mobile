@@ -136,7 +136,7 @@ public class Cadastro_Activity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "usuario.php", "POST", "UTF-8");
+                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_cadastro.php", "POST", "UTF-8");
                         httpRequest.addParam("nome", nome);
                         httpRequest.addParam("senha", senha);
                         httpRequest.addParam("email", email);

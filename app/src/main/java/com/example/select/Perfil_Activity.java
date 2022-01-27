@@ -36,7 +36,6 @@ public class Perfil_Activity extends AppCompatActivity {
     TextView cpf = findViewById(R.id.tvPerfilCpf);
     TextView telefone = findViewById(R.id.tvPerfilTelefone);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +92,7 @@ public class Perfil_Activity extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "perfil.php", "GET", "UTF-8");
+                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_perfil.php", "GET", "UTF-8");
 
                 try {
                     InputStream is = httpRequest.execute();

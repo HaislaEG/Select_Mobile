@@ -44,13 +44,6 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        EditText etEmail = findViewById(R.id.etLoginEmail);
-        EditText etSenha = findViewById(R.id.etLoginSenha);
-
-        String email = etEmail.getText().toString();
-        String senha = etSenha.getText().toString();
-
-
         List<String> permissions = new ArrayList<>();
         permissions.add(Manifest.permission.CAMERA);
         permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -61,6 +54,12 @@ public class Login_Activity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                EditText etEmail = findViewById(R.id.etLoginEmail);
+                EditText etSenha = findViewById(R.id.etLoginSenha);
+
+                String email = etEmail.getText().toString();
+                String senha = etSenha.getText().toString();
 
                 // Verifica se os dados foram digitados
                 if (email.equals("")){
@@ -109,7 +108,7 @@ public class Login_Activity extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "login.php", "POST", "UTF-8");
+                HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_login.php", "POST", "UTF-8");
                 httpRequest.setBasicAuth(Email, Senha);
 
                 try {

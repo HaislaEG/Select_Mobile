@@ -51,7 +51,7 @@ public class EditarPerfil_Activity extends AppCompatActivity {
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "alterar_perfil.php", "POST", "UTF-8");
+                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_alterar_perfil.php", "POST", "UTF-8");
                         httpRequest.setBasicAuth(email, senha);
                         httpRequest.addParam("nome", nome);
                         httpRequest.addParam("telefone", telefone);

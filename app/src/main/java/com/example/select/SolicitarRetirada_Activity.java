@@ -65,6 +65,9 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbSolicitarRetirada);
         setSupportActionBar(toolbar);  //Passa a ser a toolbar principal da aplicação
 
+        String email = Config.getLogin(SolicitarRetirada_Activity.this);
+        String senha = Config.getPassword(SolicitarRetirada_Activity.this);
+
         ImageView imvFoto = findViewById(R.id.imvFoto);
         imvFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,44 +149,40 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        LocalDateTime hr = LocalDateTime.now();
-                        String horario = hr.toString();
 
-                        HttpRequest httpRequest1 = new HttpRequest(Config.CAD_APP_URL + "solicitar_retirada.php", "POST", "UTF-8");
+                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "solicitar_retirada.php", "POST", "UTF-8");
+                        httpRequest.setBasicAuth(email, senha);
 
-                        httpRequest1.addParam("data_hora_solicitacao", horario);
-                        httpRequest1.addParam("foto_material", getCurrentPhotoPath());
+                        httpRequest.addParam("foto_material", getCurrentPhotoPath());
                         if (cbSolicitarMetal.isChecked()){
-                            httpRequest1.addParam("material", String.valueOf(cbSolicitarMetal));
+                            httpRequest.addParam("material", String.valueOf(cbSolicitarMetal));
                         }
                         else if (cbSolicitarPapel.isChecked()){
-                            httpRequest1.addParam("material", String.valueOf(cbSolicitarPapel));
+                            httpRequest.addParam("material", String.valueOf(cbSolicitarPapel));
                         }
                         else if (cbSolicitarPlastico.isChecked()){
-                            httpRequest1.addParam("material", String.valueOf(cbSolicitarPlastico));
+                            httpRequest.addParam("material", String.valueOf(cbSolicitarPlastico));
                         }
                         else {
-                            httpRequest1.addParam("material", String.valueOf(cbSolicitarVidro));
+                            httpRequest.addParam("material", String.valueOf(cbSolicitarVidro));
                         }
-
-
-                        httpRequest1.addParam("rua", rua);
-                        httpRequest1.addParam("cep", cep);
-                        httpRequest1.addParam("bairro", bairro);
-                        httpRequest1.addParam("referencia", referencia);
-                        httpRequest1.addParam("uf", uf);
-                        httpRequest1.addParam("cidade", cidade);
-                        httpRequest1.addParam("numero", numero);
+                        httpRequest.addParam("rua", rua);
+                        httpRequest.addParam("cep", cep);
+                        httpRequest.addParam("bairro", bairro);
+                        httpRequest.addParam("referencia", referencia);
+                        httpRequest.addParam("uf", uf);
+                        httpRequest.addParam("cidade", cidade);
+                        httpRequest.addParam("numero", numero);
 
 
                         try {
 
-                            InputStream is1 = httpRequest1.execute();
+                            InputStream is1 = httpRequest.execute();
 
 
                             String result1 = Utils.inputStream2String(is1, "UTF-8");
 
-                            httpRequest1.finish();
+                            httpRequest.finish();
 
 
                             Log.d("HTTP_REQUEST_RESULT", result1);
@@ -198,7 +197,7 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // Verifica se o cadastro foi realizado
+                                    // Verifica se a retirada foi solicitada
                                     if ( success1 == 1 ) {
 
                                         Intent i = new Intent(SolicitarRetirada_Activity.this, Conclusao_Activity.class);
