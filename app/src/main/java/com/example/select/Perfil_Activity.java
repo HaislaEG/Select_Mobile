@@ -146,6 +146,7 @@ public class Perfil_Activity extends AppCompatActivity {
         });
 
 
+        /*
         //Botão para excluir a conta
         Button btnPerfilExcluirConta = findViewById(R.id.btnPerfilExcluirConta);
         btnPerfilExcluirConta.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +154,7 @@ public class Perfil_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 exibirConfirmacao();
             }
-        });
+        });*/
 
 
         //Botão parar salvar as informações do perfil
@@ -169,6 +170,7 @@ public class Perfil_Activity extends AppCompatActivity {
     }
 
 
+    /*
     public void exibirConfirmacao(){
         AlertDialog.Builder msgBox = new AlertDialog.Builder(this);
         msgBox.setTitle("Deseja mesmo excluir a conta?");
@@ -240,7 +242,7 @@ public class Perfil_Activity extends AppCompatActivity {
         });
 
         msgBox.show();
-    }
+    }*/
 
 
 

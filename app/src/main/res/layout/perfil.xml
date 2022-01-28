@@ -114,28 +114,18 @@
             app:layout_constraintTop_toBottomOf="@+id/btnPerfilEditar" />
 
         <Button
-            android:id="@+id/btnPerfilExcluirConta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#1CBD82"
-            android:text="Excluir conta"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPerfilAlterarSenha" />
-
-        <Button
             android:id="@+id/btnPerfilSalvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
             android:backgroundTint="#1CBD82"
             android:text="Salvar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPerfilExcluirConta" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPerfilAlterarSenha" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnPerfilEditar"

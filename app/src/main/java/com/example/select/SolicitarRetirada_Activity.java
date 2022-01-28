@@ -68,14 +68,6 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
         String email = Config.getLogin(SolicitarRetirada_Activity.this);
         String senha = Config.getPassword(SolicitarRetirada_Activity.this);
 
-        ImageView imvFoto = findViewById(R.id.imvFoto);
-        imvFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dispatchTakePictureIntent();
-            }
-        });
-
 
         Button btnSolicitarProsseguir = findViewById(R.id.btnSolicitarProsseguir);
         btnSolicitarProsseguir.setOnClickListener(new View.OnClickListener() {
@@ -137,21 +129,23 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                 CheckBox cbSolicitarMetal = findViewById(R.id.cbSolicitarMetal);
                 String material = "";
                 if (cbSolicitarMetal.isChecked()){
-                    material = String.valueOf(cbSolicitarMetal);
+                    material = "Metal";
 
                 }
                 else if (cbSolicitarPapel.isChecked()){
-                    material = String.valueOf(cbSolicitarPapel);
+                    material = "Papel";
                 }
                 else if (cbSolicitarPlastico.isChecked()){
-                    material = String.valueOf(cbSolicitarPlastico);
+                    material = "Plástico";
                 }
                 else if (cbSolicitarVidro.isChecked()) {
-                    material = String.valueOf(cbSolicitarVidro);
+                    material = "Vidro";
                 }
                 else {
                     Toast.makeText(SolicitarRetirada_Activity.this, "Não foi selecionado o material a ser retirado", Toast.LENGTH_SHORT).show();
                 }
+
+
 
                 // Requisição HTTP
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -165,7 +159,7 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_solicitar_retirada.php", "POST", "UTF-8");
                         httpRequest.setBasicAuth(email, senha);
 
-                        httpRequest.addParam("foto", getCurrentPhotoPath());
+                        httpRequest.addFile("foto", new File(currentPhotoPath));
                         httpRequest.addParam("material", finalMaterial);
                         httpRequest.addParam("rua", rua);
                         httpRequest.addParam("cep", cep);
@@ -177,22 +171,21 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
 
                         try {
 
-                            InputStream is1 = httpRequest.execute();
-                            String result1 = Utils.inputStream2String(is1, "UTF-8");
-
+                            InputStream is = httpRequest.execute();
+                            String result = Utils.inputStream2String(is, "UTF-8");
                             httpRequest.finish();
-                            Log.d("HTTP_REQUEST_RESULT", result1);
+                            Log.d("HTTP_REQUEST_RESULT", result);
 
                             // Transforma a string em dados armazenáveis para a aplicação
-                            JSONObject jsonObject1 = new JSONObject(result1);
+                            JSONObject jsonObject1 = new JSONObject(result);
 
-                            int success1 = jsonObject1.getInt("success");
+                            int success = jsonObject1.getInt("success");
 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     // Verifica se a retirada foi solicitada
-                                    if ( success1 == 1 ) {
+                                    if ( success == 1 ) {
 
                                         Intent i = new Intent(SolicitarRetirada_Activity.this, Conclusao_Activity.class);
                                         startActivity(i);
@@ -221,6 +214,14 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
 
         });
 
+        ImageView imvFoto = findViewById(R.id.imvFoto);
+        imvFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
+
 
     }
 
@@ -238,7 +239,7 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
             Toast.makeText(SolicitarRetirada_Activity.this, "Não foi possível criar o arquivo", Toast.LENGTH_LONG).show();
         }
 
-        currentPhotoPath = f.getAbsolutePath();  // Acessa o endereço da foto
+        setCurrentPhotoPath(f.getAbsolutePath());  // Acessa o endereço da foto
 
         // Onde a foto vai ser salva
         if (f != null){
@@ -268,14 +269,13 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
 
         if(requestCode == RESULT_TAKE_PICTURE){
 
-            currentPhotoPath = getCurrentPhotoPath();
+            String currentPhotoPath = getCurrentPhotoPath();
 
             if(resultCode == Activity.RESULT_OK){
 
                 ImageView imvFoto = findViewById(R.id.imvFoto);
                 Bitmap bitmap = Utils.getBitmap(currentPhotoPath, imvFoto.getWidth(), imvFoto.getHeight());
                 imvFoto.setImageBitmap(bitmap);
-
 
             }
             else {  // Se a foto não for tirada ela vai ser excluída
