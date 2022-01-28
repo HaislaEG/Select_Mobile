@@ -127,6 +127,7 @@ public class Login_Activity extends AppCompatActivity {
                                 Toast.makeText(Login_Activity.this, "Login realizado com sucesso", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(Login_Activity.this, Main_Activity.class);
                                 startActivity(i);
+                                finish();
                             }
                         });
                     }

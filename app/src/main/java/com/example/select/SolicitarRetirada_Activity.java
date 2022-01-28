@@ -135,37 +135,38 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                 CheckBox cbSolicitarPlastico = findViewById(R.id.cbSolicitarPlastico);
                 CheckBox cbSolicitarPapel = findViewById(R.id.cbSolicitarPapel);
                 CheckBox cbSolicitarMetal = findViewById(R.id.cbSolicitarMetal);
-                if( (!cbSolicitarVidro.isChecked()) || (!cbSolicitarPlastico.isChecked()) || (!cbSolicitarPapel.isChecked()) || (!cbSolicitarMetal.isChecked()) ){
-                    Toast.makeText(SolicitarRetirada_Activity.this, "Você não marcou o material a ser retirado", Toast.LENGTH_SHORT).show();
-                    return;
+                String material = "";
+                if (cbSolicitarMetal.isChecked()){
+                    material = String.valueOf(cbSolicitarMetal);
+
                 }
-
-
+                else if (cbSolicitarPapel.isChecked()){
+                    material = String.valueOf(cbSolicitarPapel);
+                }
+                else if (cbSolicitarPlastico.isChecked()){
+                    material = String.valueOf(cbSolicitarPlastico);
+                }
+                else if (cbSolicitarVidro.isChecked()) {
+                    material = String.valueOf(cbSolicitarVidro);
+                }
+                else {
+                    Toast.makeText(SolicitarRetirada_Activity.this, "Não foi selecionado o material a ser retirado", Toast.LENGTH_SHORT).show();
+                }
 
                 // Requisição HTTP
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
+                String finalMaterial = material;
                 executorService.execute(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void run() {
 
 
-                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "solicitar_retirada.php", "POST", "UTF-8");
+                        HttpRequest httpRequest = new HttpRequest(Config.CAD_APP_URL + "mobile_solicitar_retirada.php", "POST", "UTF-8");
                         httpRequest.setBasicAuth(email, senha);
 
-                        httpRequest.addParam("foto_material", getCurrentPhotoPath());
-                        if (cbSolicitarMetal.isChecked()){
-                            httpRequest.addParam("material", String.valueOf(cbSolicitarMetal));
-                        }
-                        else if (cbSolicitarPapel.isChecked()){
-                            httpRequest.addParam("material", String.valueOf(cbSolicitarPapel));
-                        }
-                        else if (cbSolicitarPlastico.isChecked()){
-                            httpRequest.addParam("material", String.valueOf(cbSolicitarPlastico));
-                        }
-                        else {
-                            httpRequest.addParam("material", String.valueOf(cbSolicitarVidro));
-                        }
+                        httpRequest.addParam("foto", getCurrentPhotoPath());
+                        httpRequest.addParam("material", finalMaterial);
                         httpRequest.addParam("rua", rua);
                         httpRequest.addParam("cep", cep);
                         httpRequest.addParam("bairro", bairro);
@@ -174,25 +175,18 @@ public class SolicitarRetirada_Activity extends AppCompatActivity {
                         httpRequest.addParam("cidade", cidade);
                         httpRequest.addParam("numero", numero);
 
-
                         try {
 
                             InputStream is1 = httpRequest.execute();
-
-
                             String result1 = Utils.inputStream2String(is1, "UTF-8");
 
                             httpRequest.finish();
-
-
                             Log.d("HTTP_REQUEST_RESULT", result1);
-
 
                             // Transforma a string em dados armazenáveis para a aplicação
                             JSONObject jsonObject1 = new JSONObject(result1);
 
                             int success1 = jsonObject1.getInt("success");
-
 
                             runOnUiThread(new Runnable() {
                                 @Override
